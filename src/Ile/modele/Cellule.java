@@ -10,8 +10,8 @@ public class Cellule {
      */
     private Modele modele;
 
-    public State etat;
-    public Event eve;
+    public Etat etat;
+    public Evenement eve;
     /**
      * On stocke les coordonnees pour pouvoir les passer au modele lors
      * de l'appel a [compteVoisines].
@@ -21,8 +21,8 @@ public class Cellule {
 
     public Cellule(Modele modele, int x, int y) {
         this.modele = modele;
-        this.etat = State.normale;
-        this.eve = Event.no;
+        this.etat = Etat.normale;
+        this.eve = Evenement.no;
         this.x = x;
         this.y = y;
     }
@@ -36,7 +36,7 @@ public class Cellule {
     }
 
     public boolean getEtat() {
-        return this.etat == State.normale || this.etat == State.inondee;
+        return this.etat == Etat.normale || this.etat == Etat.inondee;
     }
 
 }

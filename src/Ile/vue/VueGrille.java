@@ -116,9 +116,9 @@ class VueGrille extends JPanel implements Observer {
      */
     private void paint(Graphics g, Cellule c, int x, int y) {
         // Selection d'une couleur.
-        if (c.etat == State.Etat.normale) {
+        if (c.etat == Etat.normale) {
             g.setColor(Color.WHITE);
-        } else if (c.etat== State.Etat.inondee){
+        } else if (c.etat== Etat.inondee){
             g.setColor(Color.BLUE);
         } else {
             g.setColor(Color.GRAY);

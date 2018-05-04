@@ -50,7 +50,7 @@ public class Modele extends Observable {
     public void init() {
         for (int i = 1; i <= LARGEUR; i++) {
             for (int j = 1; j <= HAUTEUR; j++) {
-                cellules[i][j].etat = State.Etat.normale;
+                cellules[i][j].etat = State.normale;
             }
         }
     }
@@ -60,17 +60,17 @@ public class Modele extends Observable {
         int x = 1 + (int) (Math.random() * ((LARGEUR - 1) + 1));
         int y = 1 + (int) (Math.random() * ((HAUTEUR - 1) + 1));
 
-        while (this.cellules[x][y].etat == State.Etat.submergee) {
+        while (this.cellules[x][y].etat == State.submergee) {
 
             x = 1 + (int) (Math.random() * ((LARGEUR - 1) + 1));
             y = 1 + (int) (Math.random() * ((HAUTEUR - 1) + 1));
 
         }
 
-        if (this.cellules[x][y].etat == State.Etat.inondee) {
-            this.cellules[x][y].etat = State.Etat.submergee;
+        if (this.cellules[x][y].etat == State.inondee) {
+            this.cellules[x][y].etat = State.submergee;
         } else {
-            this.cellules[x][y].etat = State.Etat.inondee;
+            this.cellules[x][y].etat = State.inondee;
         }
     }
 

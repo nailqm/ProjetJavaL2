@@ -101,6 +101,7 @@ public class Controleur implements ActionListener {
         if(cmd.equals("ASSEDBLE")) {
             // direction d'assecher
             fenetreASDB();
+            modele.actionRest();
         }
         if(cmd.equals("SEARCH")){
             Cellule currentCellule = modele.getCellule(j.px+1,j.py+1);

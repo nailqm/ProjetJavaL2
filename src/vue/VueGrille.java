@@ -23,8 +23,10 @@ class VueGrille extends JPanel implements Observer {
      * Définition d'une taille (en pixels) pour l'affichage des cellules.
      */
     private final static int TAILLE = 80;
-
-    public Cellule joueur;
+    /**
+     * Definition les couleurs pour les joueurs
+     */
+    private final Color[] colorList = {Color.ORANGE, Color.GREEN, Color.PINK, Color.RED};
 
     /**
      * Constructeur.
@@ -40,7 +42,6 @@ class VueGrille extends JPanel implements Observer {
          */
         Dimension dim = new Dimension(TAILLE * Modele.LARGEUR + 2, TAILLE * Modele.HAUTEUR + 2);
         this.setPreferredSize(dim);
-        this.joueur = new Cellule(modele, modele.j.px, modele.j.py);
     }
 
     /**
@@ -91,20 +92,19 @@ class VueGrille extends JPanel implements Observer {
                  * fournit les informations de dessin [g] et les coordonnees du
                  * coin en haut a gauche.
                  */
-                paint(g, modele.getCellule(i, j), i * TAILLE, j * TAILLE);
+                paint(g, modele.getCellule(i, j), (i - 1) * TAILLE, (j - 1) * TAILLE);
             }
         }
-
-        paintJoueur(g);
-
-        //paint(g, joueur, this.joueur.getX()*TAILLE, this.joueur.getY()*TAILLE);
+        for (int i = 0; i < this.modele.idJoueur; i++) {
+            paintJoueur(g, this.modele.getJoueur(i), this.colorList[i]);
+        }
     }
 
-    public void paintJoueur(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.fillOval(this.modele.j.px * TAILLE,
-                this.modele.j.py * TAILLE,
-                (int) (0.5 * TAILLE), (int) (0.5 * TAILLE));
+    public void paintJoueur(Graphics g, Joueur j, Color c) {
+        g.setColor(c);
+        int x = j.px * TAILLE + (int) (0.25 * TAILLE);
+        int y = j.py * TAILLE + (int) (0.25 * TAILLE);
+        g.fillOval(x, y, (int) (0.5 * TAILLE), (int) (0.5 * TAILLE));
     }
 
     /**
@@ -121,7 +121,7 @@ class VueGrille extends JPanel implements Observer {
         } else if (c.etat == Etat.inondee) {
             g.setColor(Color.CYAN);
         } else {
-            g.setColor(Color.GRAY);
+            g.setColor(Color.BLACK);
         }
         // Coloration d'un rectangle.
         g.fillRect(x, y, TAILLE, TAILLE);
@@ -130,8 +130,5 @@ class VueGrille extends JPanel implements Observer {
         g.fillRect(x, y, 1, TAILLE);
         g.fillRect(x + TAILLE, y, 1, TAILLE);
         g.fillRect(x, y + TAILLE, TAILLE, 1);
-
-        paintJoueur(g);
-
     }
 }

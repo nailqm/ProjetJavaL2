@@ -1,20 +1,28 @@
 package vue;
 
 import javax.swing.*;
+
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_COLOR_BURNPeer;
+import com.sun.scenario.effect.impl.sw.java.JSWBoxBlurPeer;
 import modele.*;
 import controleur.*;
+
+import java.awt.*;
+
 /**
  * Une classe pour représenter la zone contenant le bouton.
  *
  * Cette zone n'aura pas à être mise à jour et ne sera donc pas un observateur.
  * En revanche, comme la zone précédente, celle-ci est un panneau [JPanel].
  */
-class VueCommandes extends JPanel {
+public class VueCommandes extends JPanel {
     /**
      * Pour que le bouton puisse transmettre ses ordres, on garde une
      * référence au modèle.
      */
     private Modele modele;
+    /** Initialise les button speciale */
+    JButton HAUT_GAUCHE, HAUT_DROITE, BAS_GAUCHE, BAS_DROITE;
 
     /** Constructeur. */
     public VueCommandes(Modele modele) {
@@ -24,9 +32,15 @@ class VueCommandes extends JPanel {
          * texte qui doit l'étiqueter.
          * Puis on ajoute ce bouton au panneau [this].
          */
-
-        JButton finDeTour = new JButton("fin de tour");
-        this.add(finDeTour);
+        int[] joueurList;
+        joueurList = new int[this.modele.idJoueur];
+            for (int i = 0; i < joueurList.length; i++) {
+                joueurList[i] = i+1;
+            }
+            String[] echangeJoueurList = new String[joueurList.length];
+            for (int j = 0; j < joueurList.length; j++) {
+                echangeJoueurList[j] = Integer.toString(joueurList[j]);
+            }
 
         /**
          * Variante : une lambda-expression qui évite de créer une classe
@@ -37,14 +51,51 @@ class VueCommandes extends JPanel {
          boutonAvance.addActionListener(e -> { modele.avance(); });
          *
          */
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(3,3));
+
+        /** Ini des bouton speciale */
+
+        HAUT_GAUCHE = new JButton("↖");
+        buttonPanel.add(HAUT_GAUCHE);
+
         JButton HAUT = new JButton("↑");
-        this.add(HAUT);
-        JButton BAS = new JButton("↓");
-        this.add(BAS);
+        buttonPanel.add(HAUT);
+
+        HAUT_DROITE = new JButton("↗");
+        buttonPanel.add(HAUT_DROITE);
+
         JButton GAUCHE = new JButton("←");
-        this.add(GAUCHE);
+        buttonPanel.add(GAUCHE);
+
+        JButton finDeTour = new JButton("●");
+        buttonPanel.add(finDeTour);
+
         JButton DROITE = new JButton("→");
-        this.add(DROITE);
+        buttonPanel.add(DROITE);
+
+        BAS_GAUCHE = new JButton("↙");
+        buttonPanel.add(BAS_GAUCHE);
+
+        JButton BAS = new JButton("↓");
+        buttonPanel.add(BAS);
+
+        BAS_DROITE = new JButton("↘");
+        buttonPanel.add(BAS_DROITE);
+
+        this.add(buttonPanel);
+
+
+        JButton ASSECHER = new JButton("ASSECHER");
+        JButton SEARCH = new JButton("SEARCH");
+
+        Box rest = Box.createVerticalBox();
+        rest.add(ASSECHER);
+        rest.add(Box.createVerticalStrut(20));
+        rest.add(SEARCH);
+        rest.add(Box.createVerticalStrut(10));
+        this.add(rest);
+
         /**
          * Le bouton, lorsqu'il est cliqué par l'utilisateur, produit un
          * événement, de classe [ActionEvent].
@@ -59,7 +110,7 @@ class VueCommandes extends JPanel {
          * Cet observateur va enrichir notre schéma Modèle-vue.Vue d'une couche
          * intermédiaire Contrôleur, dont l'objectif est de récupérer les
          * événements produits par la vue et de les traduire en instructions
-         * pour le modèle.
+         * pour le modèle.O
          * Cette strate intermédiaire est potentiellement riche, et peut
          * notamment traduire les mêmes événements de différentes façons en
          * fonction d'un état de l'application.
@@ -67,9 +118,8 @@ class VueCommandes extends JPanel {
          * contrôleur sera donc particulièrement simple. Cela nécessite
          * néanmoins la création d'une classe dédiée.
          */
-        Controleur ctrl = new Controleur(modele);
+        Controleur ctrl = new Controleur(modele,this);
         /** Enregistrement du contrôleur comme auditeur du bouton. */
-
         finDeTour.addActionListener(ctrl);
         finDeTour.setActionCommand("finDeTour");
 
@@ -85,6 +135,36 @@ class VueCommandes extends JPanel {
         DROITE.addActionListener(ctrl);
         DROITE.setActionCommand("DROITE");
 
+        HAUT_GAUCHE.addActionListener(ctrl);
+        HAUT_GAUCHE.setActionCommand("HAUT_GAUCHE");
+
+        HAUT_DROITE.addActionListener(ctrl);
+        HAUT_DROITE.setActionCommand("HAUT_DROITE");
+
+        BAS_GAUCHE.addActionListener(ctrl);
+        BAS_GAUCHE.setActionCommand("BAS_GAUCHE");
+
+        BAS_DROITE.addActionListener(ctrl);
+        BAS_DROITE.setActionCommand("BAS_DROITE");
+
+        SEARCH.addActionListener(ctrl);
+        ASSECHER.addActionListener(ctrl);
+
+        this.isExplorateur();
+    }
+
+    public void isExplorateur(){
+        if(this.modele.getJoueur(modele.tour).isExplo()){
+            HAUT_GAUCHE.setEnabled(true);
+            HAUT_DROITE.setEnabled(true);
+            BAS_GAUCHE.setEnabled(true);
+            BAS_DROITE.setEnabled(true);
+        }else{
+            HAUT_GAUCHE.setEnabled(false);
+            HAUT_DROITE.setEnabled(false);
+            BAS_GAUCHE.setEnabled(false);
+            BAS_DROITE.setEnabled(false);
+        }
     }
 }
 /** Fin de la vue. */

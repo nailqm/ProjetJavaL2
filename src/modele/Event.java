@@ -1,36 +1,21 @@
 package modele;
 
 public enum Event {
-    Eau, Feu, Terre, Air;
+    Air, Eau, Terre, Feu,NA;
 
     @Override
     public String toString() {
         switch (this) {
             case Eau:
-                return "E";
+                return "EAU";
             case Feu:
-                return "F";
+                return "FEU";
             case Terre:
-                return "T";
+                return "TERRE";
             case Air:
-                return "A";
+                return "AIR";
             default:
-                return "null";
-        }
-    }
-
-    public String getEvent() {
-        switch (this) {
-            case Eau:
-                return "E";
-            case Feu:
-                return "F";
-            case Terre:
-                return "T";
-            case Air:
-                return "A";
-            default:
-                return "null";
+                return "NA";
         }
     }
 }

@@ -1,125 +1,164 @@
 package modele;
 
-import java.util.HashSet;
-import java.util.Random;
-
 public class Joueur {
-    // Position du Joueur
+    // Position du joueur sur la grille
     public int px, py;
 
     // Modele du Jeu
     public Modele modele;
 
-    // Deplacement du Joueur
-    public Deplace d;
+    // Nom du Joueur
+    public String nom;
 
-    // Les Artifacts et cles
-    public HashSet<Event> artifacts;
-    public HashSet<Event> cles;
+    // Character Speciale
+    public Character chCha;
 
-    // check deplacement
-    public boolean isMove;
+    // Les artefacts portés par le joueur:
+    // Air - Eau - Feu - Terre
+    public boolean[] artefact;
 
-    public Joueur(Modele modele, int x, int y) {
-        this.px = x;
-        this.py = y;
+    // Les clés portées par le joueur,
+    // du même ordre que les artefacts
+    public boolean[] cle;
+
+    public Joueur(Modele modele, int x, int y, String nom) {
         this.modele = modele;
-        this.d = null;
+        this.px = x - 1;
+        this.py = y - 1;
+        this.nom = nom;
+        this.artefact = new boolean[4];
+        this.cle = new boolean[4];
+    }
 
-        this.artifacts = new HashSet<Event>();
-        this.cles = new HashSet<Event>();
+    public Joueur(Modele modele, int x, int y, String nom, Character c) {
+        this.modele = modele;
+        this.px = x - 1;
+        this.py = y - 1;
+        this.nom = nom;
+        this.chCha = c;
+        this.artefact = new boolean[4];
+        this.cle = new boolean[4];
     }
 
     // Deplacement du Joueur
     public void move(Deplace d) {
         switch (d) {
-            case HAUT:
-                if ((this.px - 1) >= 1) {
-                    if (!modele.getCellule(px, py - 1).isSubmergee() && !this.isMove) {
-                        py -= 1;
-                        isMove = true;
-                    } else if (this.isMove) {
-                        System.out.println("Deja Deplace H!");
-                    } else {
-                        System.out.println("Submergee! Deplacement Haut Impossible.");
-                    }
-                }
-                break;
-
-            case BAS:
-                if ((this.py + 1) <= this.modele.HAUTEUR) {
-                    if (!modele.getCellule(px, py + 1).isSubmergee() && !this.isMove) {
-                        py += 1;
-                        isMove = true;
-                    } else if (this.isMove) {
-                        System.out.println("Deja Deplace B!");
-                    } else {
-                        System.out.println("Submergee! Deplacement Bas Impossible.");
-                    }
-                }
-                break;
-
             case GAUCHE:
-                if ((this.px - 1) >= 1) {
-                    if (!modele.getCellule(px - 1, py).isSubmergee() && !this.isMove) {
-                        px -= 1;
-                        isMove = true;
-                    } else if (this.isMove) {
-                        System.out.println("Deja Deplace G!");
-                    } else {
-                        System.out.println("Submergee! Deplacement Gauche Impossible.");
-                    }
-                }
+                px -= 1;
                 break;
-
             case DROITE:
-                if ((this.px + 1) <= this.modele.LARGEUR) {
-                    if (!modele.getCellule(px + 1, py).isSubmergee() && !this.isMove) {
-                        px += 1;
-                        isMove = true;
-                    } else if (this.isMove) {
-                        System.out.println("Deja Deplace D!");
-                    } else {
-                        System.out.println("Submergee! Deplacement Droite Impossible.");
-                    }
-                }
+                px += 1;
+                break;
+            case HAUT:
+                py -= 1;
+                break;
+            case BAS:
+                py += 1;
+                break;
+            case HAUT_GAUCHE:
+                py -= 1;
+                px -= 1;
+                break;
+            case HAUT_DROITE:
+                py -= 1;
+                px += 1;
+                break;
+            case BAS_GAUCHE:
+                py += 1;
+                px -= 1;
+                break;
+            case BAS_DROITE:
+                py += 1;
+                px += 1;
                 break;
         }
     }
 
+    // Verification de deplacement
+    public boolean checkMove(Deplace d, int x, int y) {
+        switch (d) {
+            case GAUCHE:
+                if (x > 0) {
+                    if (modele.getCellule(x, y + 1).getEtat() != Etat.submergee)
+                        return true;
+                }
+                break;
+            case DROITE:
+                if (x < modele.LARGEUR - 1) {
+                    if (modele.getCellule(x + 1 + 1, y + 1).getEtat() != Etat.submergee)
+                        return true;
+                }
+                break;
+            case HAUT:
+                if (y > 0) {
+                    if (modele.getCellule(x + 1, y).getEtat() != Etat.submergee)
+                        return true;
+                }
+                break;
+            case BAS:
+                if (y < modele.HAUTEUR - 1) {
+                    if (modele.getCellule(x + 1, y + 1 + 1).getEtat() != Etat.submergee)
+                        return true;
+                }
+                break;
+            case HAUT_GAUCHE:
+                return (checkMove(Deplace.HAUT, x, y) && checkMove(Deplace.GAUCHE, x, y));
+
+            case HAUT_DROITE:
+                return (checkMove(Deplace.HAUT, x, y) && checkMove(Deplace.DROITE, x, y));
+
+            case BAS_GAUCHE:
+                return (checkMove(Deplace.BAS, x, y) && checkMove(Deplace.GAUCHE, x, y));
+
+            case BAS_DROITE:
+                return (checkMove(Deplace.BAS, x, y) && checkMove(Deplace.BAS, x, y));
+
+            default:
+                return false;
+        }
+        return false;
+    }
+
+    public boolean isValide(Deplace d) {
+        if (this.checkMove(d, this.px, this.py)) {
+            this.move(d);
+            return true;
+        } else {
+            System.out.println("Mouvement invalide !");
+            return false;
+        }
+    }
 
     /* === Fonctionnalités avancées === */
-    // Obtenir les cles aleatoirement
-    public void rdgetCle() {
-        // 50% de probabilité d'obtenir la clé
-        int p = new Random().nextInt(2);
-        while (p == 1) {
-            // Choisissez l'une des quatre clés
-            int q = new Random().nextInt(4);
-            switch (q) {
-                case 0:
-                    this.cles.add(Event.Air);
-                    System.out.println("Cle Air");
-                    break;
-                case 1:
-                    this.cles.add(Event.Eau);
-                    System.out.println("Cle Eau");
-                    break;
-                case 2:
-                    this.cles.add(Event.Feu);
-                    System.out.println("Cle Feu");
-                    break;
-                case 3:
-                    this.cles.add(Event.Terre);
-                    System.out.println("Cle Terre");
-                    break;
-            }
+    public void getEvent(Event e) {
+        switch (e) {
+            case Air:
+                this.artefact[0] = true;
+                break;
+            case Eau:
+                this.artefact[1] = true;
+                break;
+            case Feu:
+                this.artefact[2] = true;
+                break;
+            case Terre:
+                this.artefact[3] = true;
+                break;
+            default:
+                break;
         }
     }
 
-    // recuprer le Artifact avec cle
-    public void getArti(Event e) {
-        this.artifacts.add(e);
+    public void getCle(int i) {
+        this.cle[i] = true;
+    }
+
+    public Character getChCha() {
+        return chCha;
+    }
+
+    public boolean isExplo() {
+        return chCha == Character.Explorateur;
     }
 
     // Afficher les Evenements

@@ -1,6 +1,17 @@
-# ProjetJavaL2
----
+#Projet Ile Interdite
+
+@binome Kelun Chai  Mamadou Ndiaye
+- [x] Partie I : On va se la couler douce
+- [x] Partie II : Noooon, pas la trempette !
+- [x] Partie III ： Sa palce est dans un musee
+- [x] Speciale : Actions speciales.
+- [x] Speciale : Personnages particuliers. **Ingenieur et Explorateur **
+- [ ] Speciale : Simulation d’un vrai paquet de cartes.
+- [ ] Speciale : Echanges de cles. 
+
+
 Diagramme de classe
+---
 ![](https://github.com/nailqm/ProjetJavaL2/blob/master/UML.png)
 
 Programme Principe
@@ -10,3 +21,7 @@ Programme Principe
 Pannel
 ---
 ![](https://github.com/nailqm/ProjetJavaL2/blob/master/2.PNG)
+
+Pannel Double
+---
+![](https://github.com/nailqm/ProjetJavaL2/blob/master/3.PNG)

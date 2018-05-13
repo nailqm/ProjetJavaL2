@@ -1,5 +1,6 @@
-#Projet Ile Interdite
-
+Projet Ile Interdite
+---
+**Description**
 @binome Kelun Chai  Mamadou Ndiaye
 - [x] Partie I : On va se la couler douce
 - [x] Partie II : Noooon, pas la trempette !
@@ -9,6 +10,7 @@
 - [ ] Speciale : Simulation d’un vrai paquet de cartes.
 - [ ] Speciale : Echanges de cles. 
 
+**Structure**
 
 Diagramme de classe
 ---

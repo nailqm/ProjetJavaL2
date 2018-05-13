@@ -4,23 +4,37 @@ import java.util.Random;
 
 /**
  * Le modèle : le coeur de l'application.
- * <p>
+ *
  * Le modèle étend la classe [Observable] : il va posseder un certain nombre
  * d'observateurs (ici, un : la partie de la vue responsable de l'affichage)
  * et devra les prevenir avec [notifyObservers] lors des modifications.
- * Voir la methode [avance()] pour cela.
  */
 
 public class Modele extends Observable {
-    /** On fixe la taille de la grille. */
+    /**
+     * On fixe la taille de la grille.
+     */
     public static final int HAUTEUR = 6, LARGEUR = 6;
-    /** Ajouter les Joueurs */
+
+    /**
+     * Ajouter les Joueurs
+     */
     public Joueur[] joueurs;
+
+    /**
+     * Identification du joueur
+     */
     public int idJoueur;
+    /**
+     * Tour de Jeu
+     */
     public int tour;
     public int moveRest;
-    /** On stocke un tableau de cellules. */
+    /**
+     * On stocke un tableau de cellules.
+     */
     private Cellule[][] cellules;
+
     /**
      * Construction : on initialise un tableau de cellules.
      */
@@ -30,8 +44,8 @@ public class Modele extends Observable {
          * colonne de chaque côté, dont les cellules n'évolueront pas.
          */
         cellules = new Cellule[HAUTEUR + 2][LARGEUR + 2];
-        for (int i = 0; i < LARGEUR +2; i++) {
-            for (int j = 0; j < HAUTEUR+2; j++) {
+        for (int i = 0; i < LARGEUR + 2; i++) {
+            for (int j = 0; j < HAUTEUR + 2; j++) {
                 cellules[i][j] = new Cellule(this, i, j);
             }
         }
@@ -50,7 +64,7 @@ public class Modele extends Observable {
     public void init() {
         for (int i = 1; i <= LARGEUR; i++) {
             for (int j = 1; j <= HAUTEUR; j++) {
-                    cellules[i][j].etat = Etat.normale;
+                cellules[i][j].etat = Etat.normale;
             }
         }
     }
@@ -81,10 +95,10 @@ public class Modele extends Observable {
 
 
     public void getCle() {
-        int pbGetCle = new Random().nextInt(5);
-        if (pbGetCle < 4) {
-            this.joueurs[tour].getCle(pbGetCle);
-            System.out.println("Cle Obtenue: " + pbGetCle);
+        int rdCle = new Random().nextInt(5);
+        if (rdCle < 4) {
+            this.joueurs[tour].getCle(rdCle);
+            System.out.println("Cle Obtenue: " + rdCle);
         } else {
             System.out.println("Pas de cle.");
         }
@@ -92,11 +106,11 @@ public class Modele extends Observable {
 
 
     public void finDeTour() {
-        for (int i = 0; i <3 ; i++) {
+        for (int i = 0; i < 3; i++) {
             rdInondee();
         }
 
-        /** A la fin de tour, joueurs peuvent obtenir une cle, ou rien */
+        /** A la fin de tour, joueurs peuvent obtenir une cle */
         getCle();
 
         moveRest = 3;
@@ -106,7 +120,7 @@ public class Modele extends Observable {
             this.tour += 1;
         }
 
-        /** Pour finir, le modele ayant change, on signale aux observateurs
+        /**Pour finir, le modele ayant change, on signale aux observateurs
          * qu'ils doivent se mettre a jour.
          */
         notifyObservers();
@@ -115,9 +129,17 @@ public class Modele extends Observable {
     public void assecher(Cellule c) {
         if (c.isInondee()) {
             cellules[c.getX()][c.getY()].setEtat(Etat.normale);
-        } else if(c.isSubmergee()) {
+        }  else {
+            System.out.println("Assecher impossible.");
+        }
+    }
+
+    public void assecherDble(Cellule c){
+        if (c.isInondee()){
+            cellules[c.getX()][c.getY()].setEtat(Etat.normale);
+        }else if (c.isSubmergee()) {
             cellules[c.getX()][c.getY()].setEtat(Etat.inondee);
-        }else{
+        }else {
             System.out.println("Assecher impossible.");
         }
     }

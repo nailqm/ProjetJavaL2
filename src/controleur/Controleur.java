@@ -44,6 +44,7 @@ public class Controleur implements ActionListener {
 
         if (cmd.equals("finDeTour")) {
             modele.finDeTour();
+            vueCommandes.isIngenieur();
             vueCommandes.isExplorateur();
         }
 
@@ -94,9 +95,13 @@ public class Controleur implements ActionListener {
         }
         if(cmd.equals("ASSECHER")) {
             // direction d'assecher
-            fenetre();
+            fenetreAS();
+            modele.actionRest();
         }
-
+        if(cmd.equals("ASSEDBLE")) {
+            // direction d'assecher
+            fenetreASDB();
+        }
         if(cmd.equals("SEARCH")){
             Cellule currentCellule = modele.getCellule(j.px+1,j.py+1);
             if(currentCellule.getEvent() == Event.NA){
@@ -139,9 +144,37 @@ public class Controleur implements ActionListener {
                 modele.assecher(modele.getCellule(px+1,py));
             }
         }
+
+        if (cmd.equals("CDB")) {
+            modele.assecherDble(modele.getCellule(px,py));
+        }
+
+        if (cmd.equals("GDB")) {
+            if (j.px - 1 >= 1) {
+                modele.assecherDble(modele.getCellule(px-1,py));
+            }
+        }
+
+        if (cmd.equals("HDB")) {
+            if (j.py - 1 >= 1) {
+                modele.assecherDble(modele.getCellule(px,py-1));
+            }
+        }
+
+        if (cmd.equals("BDB")) {
+            if (j.py + 1 <= this.modele.HAUTEUR) {
+                modele.assecherDble(modele.getCellule(px,py+1));
+            }
+        }
+
+        if (cmd.equals("DDB")) {
+            if (j.px + 1 <= this.modele.LARGEUR) {
+                modele.assecherDble(modele.getCellule(px+1,py));
+            }
+        }
     }
 
-    public void fenetre(){
+    public void fenetreAS(){
         JFrame frame = new JFrame("ASSECHER");
         // Position de la fenêtre
         frame.setLocation(100, 50);
@@ -191,5 +224,57 @@ public class Controleur implements ActionListener {
         G.setActionCommand("G");
         D.setActionCommand("D");
         C.setActionCommand("C");
+    }
+
+    public void fenetreASDB(){
+        JFrame frame = new JFrame("ASSECHER DOUBLE");
+        // Position de la fenêtre
+        frame.setLocation(100, 50);
+        // Taille du la fenêtre
+        frame.setSize(400, 400);
+
+        frame.setVisible(true);
+        frame.setLayout(null);
+
+        JButton HDB = new JButton("↑");
+        JButton BDB = new JButton("↓");
+        JButton GDB = new JButton("←");
+        JButton DDB = new JButton("→");
+        JButton CDB = new JButton("●");
+
+        CDB.setSize(60, 60);
+        CDB.setLocation(150, 150);
+
+        HDB.setSize(60, 60);
+        HDB.setLocation(150, 50);
+
+        BDB.setSize(60, 60);
+        BDB.setLocation(150, 250);
+
+        GDB.setSize(60, 60);
+        GDB.setLocation(50, 150);
+
+        DDB.setSize(60, 60);
+        DDB.setLocation(250, 150);
+
+        JPanel panel = new JPanel();
+
+        frame.add(HDB);
+        frame.add(CDB);
+        frame.add(GDB);
+        frame.add(BDB);
+        frame.add(DDB);
+
+        HDB.addActionListener(this);
+        BDB.addActionListener(this);
+        GDB.addActionListener(this);
+        DDB.addActionListener(this);
+        CDB.addActionListener(this);
+
+        HDB.setActionCommand("HDB");
+        BDB.setActionCommand("BDB");
+        GDB.setActionCommand("GDB");
+        DDB.setActionCommand("DDB");
+        CDB.setActionCommand("CDB");
     }
 }

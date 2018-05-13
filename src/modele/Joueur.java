@@ -153,12 +153,12 @@ public class Joueur {
         this.cle[i] = true;
     }
 
-    public Character getChCha() {
-        return chCha;
-    }
-
     public boolean isExplo() {
         return chCha == Character.Explorateur;
+    }
+
+    public boolean isInge(){
+        return chCha == Character.Ingenieur;
     }
 
     // Afficher les Evenements

@@ -23,6 +23,7 @@ public class VueCommandes extends JPanel {
     private Modele modele;
     /** Initialise les button speciale */
     JButton HAUT_GAUCHE, HAUT_DROITE, BAS_GAUCHE, BAS_DROITE;
+    JButton ASSEDBLE;
 
     /** Constructeur. */
     public VueCommandes(Modele modele) {
@@ -36,10 +37,6 @@ public class VueCommandes extends JPanel {
         joueurList = new int[this.modele.idJoueur];
             for (int i = 0; i < joueurList.length; i++) {
                 joueurList[i] = i+1;
-            }
-            String[] echangeJoueurList = new String[joueurList.length];
-            for (int j = 0; j < joueurList.length; j++) {
-                echangeJoueurList[j] = Integer.toString(joueurList[j]);
             }
 
         /**
@@ -86,14 +83,18 @@ public class VueCommandes extends JPanel {
         this.add(buttonPanel);
 
 
+        ASSEDBLE = new JButton("ASSEDBLE");
+
         JButton ASSECHER = new JButton("ASSECHER");
         JButton SEARCH = new JButton("SEARCH");
 
         Box rest = Box.createVerticalBox();
         rest.add(ASSECHER);
-        rest.add(Box.createVerticalStrut(20));
+        rest.add(Box.createVerticalStrut(5));
+        rest.add(ASSEDBLE);
+        rest.add(Box.createVerticalStrut(5));
         rest.add(SEARCH);
-        rest.add(Box.createVerticalStrut(10));
+        rest.add(Box.createVerticalStrut(5));
         this.add(rest);
 
         /**
@@ -148,11 +149,25 @@ public class VueCommandes extends JPanel {
         BAS_DROITE.setActionCommand("BAS_DROITE");
 
         SEARCH.addActionListener(ctrl);
-        ASSECHER.addActionListener(ctrl);
+        SEARCH.setActionCommand("SEARCH");
 
+        ASSECHER.addActionListener(ctrl);
+        ASSECHER.setActionCommand("ASSECHER");
+
+        ASSEDBLE.addActionListener(ctrl);
+        ASSEDBLE.setActionCommand("ASSEDBLE");
+
+        this.isIngenieur();
         this.isExplorateur();
     }
 
+    public void isIngenieur(){
+        if(this.modele.getJoueur(modele.tour).isInge()){
+            ASSEDBLE.setEnabled(true);
+        }else{
+            ASSEDBLE.setEnabled(false);
+        }
+    }
     public void isExplorateur(){
         if(this.modele.getJoueur(modele.tour).isExplo()){
             HAUT_GAUCHE.setEnabled(true);

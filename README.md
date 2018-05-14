@@ -1,14 +1,90 @@
 Projet Ile Interdite
 ---
 **Description**
+
 @binome Kelun Chai  Mamadou Ndiaye
 - [x] Partie I : On va se la couler douce
 - [x] Partie II : Noooon, pas la trempette !
-- [x] Partie III ： Sa palce est dans un musee
-- [x] Speciale : Actions speciales.
-- [x] Speciale : Personnages particuliers. **Ingenieur et Explorateur **
-- [ ] Speciale : Simulation d’un vrai paquet de cartes.
-- [ ] Speciale : Echanges de cles. 
+- [x] Partie III ： Sa palce est dans un musee</br>
+**Initialiser les artefacts**
+```
+// Initialiser manuelle
+// Main.java 
+
+/** Initiale les artefacts */
+        modele.iniEvent(modele.getCellule(1,3), Event.Air);
+        modele.iniEvent(modele.getCellule(4,6),Event.Eau);
+        modele.iniEvent(modele.getCellule(2,2),Event.Feu);
+        modele.iniEvent(modele.getCellule(5,5),Event.Terre);
+        
+/** Position des artefacts */
+        System.out.print("===Artefacts===\nAir(1,3)\nEau(4,6)\nFeu:(2,2)\nTerre:(5,5)\n");
+```
+**Initialiser les cles**
+Apres chaque "fin de tour", joueurs peuvent obtenir une cle aleatoirement.
+```
+// "Cle" est une liste booléenne, définie dans Joeur.java
+// Les clés portées par le joueur,
+// Air[0] - Eau[1] - Feu[2] - Terre[3]
+    public boolean[] cle;
+
+// Modele.java
+// Obtenir une cle ou pas
+public void rdmCle() {
+        int rdCle = new Random().nextInt(5);
+        if (rdCle < 4) {
+            this.joueurs[tour].getCle(rdCle);
+            System.out.println("Cle Obtenue: " + rdCle);
+        } else {
+            System.out.println("Pas de cle.");
+        }
+    }
+    
+// Joueur.java
+// Renvoyer une cle
+public void getCle(int i) {
+        this.cle[i] = true;
+    }
+```
+- [x] Speciale : Actions speciales.</br>
+**Assecher simple**
+```
+// Modele.java
+public void assecher(Cellule c) {
+        if (c.isInondee()) {
+            cellules[c.getX()][c.getY()].setEtat(Etat.normale);
+        }  else {
+            System.out.println("Assecher impossible.");
+        }
+    }
+```
+**Assecher double**
+Si le rôle est `ingenieur`, activez le bouton `ASSEDBLE` et deux fenêtres apparaissent.
+```
+// Modele.java
+public void assecherDble(Cellule c){
+        if (c.isInondee()){
+            cellules[c.getX()][c.getY()].setEtat(Etat.normale);
+        }else if (c.isSubmergee()) {
+            cellules[c.getX()][c.getY()].setEtat(Etat.inondee);
+        }else {
+            System.out.println("Assecher impossible.");
+        }
+    }
+ ```   
+- [x] Speciale : Personnages particuliers. 
+**Ingenieur et Explorateur **</br>
+
+Dans `Controleur`, détecter si c'est un rôle spécial, et faire un appel a `public void isIngenieur()` dans `VueControleur`.
+```
+// Main.java
+
+/** Initiale les joueurs */
+        modele.joueurs[0] = new Joueur(modele, 1, 1, "j1", Character.Explorateur);
+        modele.joueurs[1] = new Joueur(modele, 2, 2, "j2");
+        modele.joueurs[2] = new Joueur(modele, 3, 3, "j3", Character.Ingenieur);
+        modele.joueurs[3] = new Joueur(modele, 4, 4, "j4");
+```
 
 **Structure**
 

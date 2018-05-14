@@ -52,8 +52,7 @@ public void getCle(int i) {
 ```
 
 **Recuprer artefacts**</br>
-https://github.com/nailqm/ProjetJavaL2/blob/master/recuprer.mp4</br>
-
+![](https://github.com/nailqm/ProjetJavaL2/blob/master/recuprer-success.jpg)</br>
 ![](https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20artefact.PNG)</br>
 Dans la classe `Controleur` </br>
 ```

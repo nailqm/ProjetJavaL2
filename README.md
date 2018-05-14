@@ -104,7 +104,8 @@ public void assecherDble(Cellule c){
 - [x] Speciale : Personnages particuliers. </br>
 **Ingenieur et Explorateur**</br>
 Dans `Controleur`, détecter si c'est un rôle spécial, et faire un appel a `public void isIngenieur()` dans `VueControleur`.</br>
-https://github.com/nailqm/ProjetJavaL2/blob/master/charactere-speciale.mp4" </br>
+![](https://github.com/nailqm/ProjetJavaL2/blob/master/isExpl.PNG) </br>
+![](https://github.com/nailqm/ProjetJavaL2/blob/master/isInge.PNG) </br>
 ```
 // Main.java
 

@@ -8,7 +8,7 @@ Projet Ile Interdite
 - [x] Partie III ： Sa palce est dans un musee</br>
 **Initialiser les artefacts**</br>
 Initialiser Manuelle et afficher dans la Command Line</br>
-![Ini Artefact]https://github.com/nailqm/ProjetJavaL2/blob/master/artefact.PNG
+![Ini Artefact](https://github.com/nailqm/ProjetJavaL2/blob/master/artefact.PNG)
 ```
 // Main.java 
 
@@ -24,7 +24,7 @@ Initialiser Manuelle et afficher dans la Command Line</br>
 
 **Initialiser les cles**
 Apres chaque "fin de tour", joueurs peuvent obtenir une cle aleatoirement.
-![Obtenir Cle]https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20cle.PNG
+![Obtenir Cle](https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20cle.PNG)
 ```
 // "Cle" est une liste booléenne, définie dans Joeur.java
 // Les clés portées par le joueur,
@@ -59,7 +59,7 @@ public void getCle(int i) {
     allowfullscreen>
 </iframe>
 
-![]https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20artefact.PNG
+![](https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20artefact.PNG)
 Dans la classe `Controleur` </br>
 ```
 if (cmd.equals("RECUPERER")) {

@@ -2,13 +2,14 @@ Projet Ile Interdite
 ---
 **Description**
 
-@binome Kelun Chai  Mamadou Ndiaye
+@binome **Kelun Chai  Mamadou Ndiaye**</br>
 - [x] Partie I : On va se la couler douce
 - [x] Partie II : Noooon, pas la trempette !
 - [x] Partie III ： Sa palce est dans un musee</br>
-**Initialiser les artefacts**
+**Initialiser les artefacts**</br>
+Initialiser Manuelle et afficher dans la Command Line</br>
+![Ini Artefact]https://github.com/nailqm/ProjetJavaL2/blob/master/artefact.PNG
 ```
-// Initialiser manuelle
 // Main.java 
 
 /** Initiale les artefacts */
@@ -20,8 +21,10 @@ Projet Ile Interdite
 /** Position des artefacts */
         System.out.print("===Artefacts===\nAir(1,3)\nEau(4,6)\nFeu:(2,2)\nTerre:(5,5)\n");
 ```
+
 **Initialiser les cles**
 Apres chaque "fin de tour", joueurs peuvent obtenir une cle aleatoirement.
+![Obtenir Cle]https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20cle.PNG
 ```
 // "Cle" est une liste booléenne, définie dans Joeur.java
 // Les clés portées par le joueur,
@@ -46,8 +49,44 @@ public void getCle(int i) {
         this.cle[i] = true;
     }
 ```
+
+**Recuprer artefacts**
+<iframe 
+    height=450 
+    width=800 
+    src="https://github.com/nailqm/ProjetJavaL2/blob/master/recuprer.mp4" 
+    frameborder=0 
+    allowfullscreen>
+</iframe>
+
+![]https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20artefact.PNG
+Dans la classe `Controleur` </br>
+```
+if (cmd.equals("RECUPERER")) {
+            Cellule currentCellule = modele.getCellule(j.px + 1, j.py + 1);
+            if (currentCellule.getEvent() == Event.NA) {
+                System.out.println("Pas d'artefact.");
+            } else {
+                System.out.println("Artefact " + currentCellule.getEvent() + " trouve!");
+                if (modele.hasArtefact(currentCellule.getEvent())) {
+                    System.out.println("Obtenir l'artefact " + currentCellule.getEvent());
+                } else {
+                    System.out.println("Pas de Cle.");
+                }
+            }
+        }
+ ```       
+ 
 - [x] Speciale : Actions speciales.</br>
 **Assecher simple**
+<iframe 
+    height=450 
+    width=800 
+    src="https://github.com/nailqm/ProjetJavaL2/blob/master/assecher-simple.mp4" 
+    frameborder=0 
+    allowfullscreen>
+</iframe>
+
 ```
 // Modele.java
 public void assecher(Cellule c) {
@@ -58,8 +97,17 @@ public void assecher(Cellule c) {
         }
     }
 ```
+
 **Assecher double**
 Si le rôle est `ingenieur`, activez le bouton `ASSEDBLE` et deux fenêtres apparaissent.
+<iframe 
+    height=450 
+    width=800 
+    src="https://github.com/nailqm/ProjetJavaL2/blob/master/assecher-dble.mp4" 
+    frameborder=0 
+    allowfullscreen>
+</iframe>
+
 ```
 // Modele.java
 public void assecherDble(Cellule c){
@@ -72,10 +120,18 @@ public void assecherDble(Cellule c){
         }
     }
  ```   
+ 
 - [x] Speciale : Personnages particuliers. 
-**Ingenieur et Explorateur **</br>
-
+**Ingenieur et Explorateur**</br>
 Dans `Controleur`, détecter si c'est un rôle spécial, et faire un appel a `public void isIngenieur()` dans `VueControleur`.
+<iframe 
+    height=450 
+    width=800 
+    src="https://github.com/nailqm/ProjetJavaL2/blob/master/charactere-speciale.mp4" 
+    frameborder=0 
+    allowfullscreen>
+</iframe>
+
 ```
 // Main.java
 

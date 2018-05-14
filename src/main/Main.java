@@ -13,9 +13,9 @@ public class Main {
         modele.joueurs[2] = new Joueur(modele, 3, 3, "j3", Character.Ingenieur);
         modele.joueurs[3] = new Joueur(modele, 4, 4, "j4");
         /** Initiale les artefacts */
-        modele.iniEvent(modele.getCellule(2, 2), Event.Feu);
-        modele.iniEvent(modele.getCellule(1,3),Event.Air);
-        modele.iniEvent(modele.getCellule(4,6),Event.Eau);
+        modele.iniEvent(modele.getCellule(3, 2), Event.Air);
+        modele.iniEvent(modele.getCellule(1,3),Event.Eau);
+        modele.iniEvent(modele.getCellule(4,6),Event.Feu);
         modele.iniEvent(modele.getCellule(5,5),Event.Terre);
         /** Nom des joueurs */
         for (int i = 0; i < modele.idJoueur; i++) {

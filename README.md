@@ -8,7 +8,7 @@ Projet Ile Interdite
 - [x] Partie III ： Sa palce est dans un musee</br>
 **Initialiser les artefacts**</br>
 Initialiser Manuelle et afficher dans la Command Line</br>
-![Ini Artefact](https://github.com/nailqm/ProjetJavaL2/blob/master/artefact.PNG)</br>
+![](https://github.com/nailqm/ProjetJavaL2/blob/master/artefact.PNG)</br>
 ```
 // Main.java 
 
@@ -24,6 +24,7 @@ Initialiser Manuelle et afficher dans la Command Line</br>
 
 **Initialiser les cles**</br>
 Apres chaque "fin de tour", joueurs peuvent obtenir une cle aleatoirement.</br>
+
 ![Obtenir Cle](https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20cle.PNG)</br>
 ```
 // "Cle" est une liste booléenne, définie dans Joeur.java
@@ -51,8 +52,8 @@ public void getCle(int i) {
 ```
 
 **Recuprer artefacts**</br>
-<iframe height=498 width=510 src="https://github.com/nailqm/ProjetJavaL2/blob/master/recuprer.mp4" frameborder=0 allowfullscreen></iframe>
-</br>
+https://github.com/nailqm/ProjetJavaL2/blob/master/recuprer.mp4</br>
+
 ![](https://github.com/nailqm/ProjetJavaL2/blob/master/obtenir%20artefact.PNG)</br>
 Dans la classe `Controleur` </br>
 ```
@@ -73,14 +74,7 @@ if (cmd.equals("RECUPERER")) {
  
 - [x] Speciale : Actions speciales.</br>
 **Assecher simple**</br>
-<iframe 
-    height=450 
-    width=800 
-    src="https://github.com/nailqm/ProjetJavaL2/blob/master/assecher-simple.mp4" 
-    frameborder=0 
-    allowfullscreen>
-</iframe>
-</br>
+https://github.com/nailqm/ProjetJavaL2/blob/master/assecher-simple.mp4</br>
 ```
 // Modele.java
 public void assecher(Cellule c) {
@@ -94,14 +88,7 @@ public void assecher(Cellule c) {
 
 **Assecher double**</br>
 Si le rôle est `ingenieur`, activez le bouton `ASSEDBLE` et deux fenêtres apparaissent.</br>
-<iframe 
-    height=450 
-    width=800 
-    src="https://github.com/nailqm/ProjetJavaL2/blob/master/assecher-dble.mp4" 
-    frameborder=0 
-    allowfullscreen>
-</iframe>
-</br>
+https://github.com/nailqm/ProjetJavaL2/blob/master/assecher-dble.mp4</br>
 ```
 // Modele.java
 public void assecherDble(Cellule c){
@@ -118,14 +105,7 @@ public void assecherDble(Cellule c){
 - [x] Speciale : Personnages particuliers. </br>
 **Ingenieur et Explorateur**</br>
 Dans `Controleur`, détecter si c'est un rôle spécial, et faire un appel a `public void isIngenieur()` dans `VueControleur`.</br>
-<iframe 
-    height=450 
-    width=800 
-    src="https://github.com/nailqm/ProjetJavaL2/blob/master/charactere-speciale.mp4" 
-    frameborder=0 
-    allowfullscreen>
-</iframe>
-</br>
+https://github.com/nailqm/ProjetJavaL2/blob/master/charactere-speciale.mp4" </br>
 ```
 // Main.java
 

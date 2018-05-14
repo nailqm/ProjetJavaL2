@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.Random;
+
 /**
  * Définition d'une classe pour les cellules.
  * Cette classe fait encore partie du modèle.
@@ -17,6 +19,7 @@ public class Cellule {
 
     // Evenement de la Cellule
     private Event event;
+    public boolean hasArtefact;
 
     public Cellule(Modele modele, int x, int y) {
         this.modele = modele;
@@ -24,6 +27,7 @@ public class Cellule {
         this.y = y;
         this.etat = Etat.normale;
         this.event = Event.NA;
+        this.hasArtefact = false;
     }
 
     /* Les opérations sur "état" */
@@ -50,16 +54,21 @@ public class Cellule {
     public Event getEvent() {
         return event;
     }
-
     public Event setEvent(Event e) {this.event = e; return e;}
+
 
     public int getX(){return this.x;}
     public int getY(){return this.y;}
 
-    /* Les operations sur "cles" */
-    public static final String[] cleList = {"Air","Eau","Terre","Feu","NA"};
-
     /* === Fonctionnalités avancées === */
+
+//    public void rdArtefact(){
+//        int p = new Random().nextInt(4);
+//        if(p==0){
+//
+//        }
+//    }
+
     // Lien entre artefacts et cles
     public static int cleToArtefact(Event e) {
         switch (e) {
@@ -74,21 +83,6 @@ public class Cellule {
             case NA:
             default:
                 return 4;
-        }
-    }
-
-    public static Event artefactToCle(String s){
-        switch (s){
-            case "Air":
-                return Event.Air;
-            case "Eau":
-                return Event.Eau;
-            case "Terre":
-                return Event.Terre;
-            case "Feu":
-                return Event.Feu;
-            default:
-                return Event.NA;
         }
     }
 }

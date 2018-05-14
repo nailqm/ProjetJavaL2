@@ -86,14 +86,14 @@ public class VueCommandes extends JPanel {
         ASSEDBLE = new JButton("ASSEDBLE");
 
         JButton ASSECHER = new JButton("ASSECHER");
-        JButton SEARCH = new JButton("SEARCH");
+        JButton RECUPERER = new JButton("RECUPERER");
 
         Box rest = Box.createVerticalBox();
         rest.add(ASSECHER);
         rest.add(Box.createVerticalStrut(5));
         rest.add(ASSEDBLE);
         rest.add(Box.createVerticalStrut(5));
-        rest.add(SEARCH);
+        rest.add(RECUPERER);
         rest.add(Box.createVerticalStrut(5));
         this.add(rest);
 
@@ -148,8 +148,8 @@ public class VueCommandes extends JPanel {
         BAS_DROITE.addActionListener(ctrl);
         BAS_DROITE.setActionCommand("BAS_DROITE");
 
-        SEARCH.addActionListener(ctrl);
-        SEARCH.setActionCommand("SEARCH");
+        RECUPERER.addActionListener(ctrl);
+        RECUPERER.setActionCommand("RECUPERER");
 
         ASSECHER.addActionListener(ctrl);
         ASSECHER.setActionCommand("ASSECHER");

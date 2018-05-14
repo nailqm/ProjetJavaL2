@@ -40,7 +40,7 @@ public class Controleur implements ActionListener {
         String cmd = e.getActionCommand();
         Joueur j = this.modele.getJoueur(modele.tour);
         int px = this.modele.getJoueur(modele.tour).px + 1;
-        int py = this.modele.getJoueur(modele.tour).py+1;
+        int py = this.modele.getJoueur(modele.tour).py + 1;
 
         if (cmd.equals("finDeTour")) {
             modele.finDeTour();
@@ -54,7 +54,7 @@ public class Controleur implements ActionListener {
         }
 
         if (cmd.equals("HAUT")) {
-            if(j.isValide(Deplace.HAUT)) {
+            if (j.isValide(Deplace.HAUT)) {
                 modele.actionRest();
             }
         }
@@ -73,109 +73,110 @@ public class Controleur implements ActionListener {
                 modele.actionRest();
             }
         }
-        if (cmd.equals("HAUT_GAUCHE")){
-            if(j.isValide(Deplace.HAUT_GAUCHE)){
+        if (cmd.equals("HAUT_GAUCHE")) {
+            if (j.isValide(Deplace.HAUT_GAUCHE)) {
                 modele.actionRest();
             }
         }
-        if(cmd.equals("HAUT_DROITE")){
-            if(j.isValide(Deplace.HAUT_DROITE)){
+        if (cmd.equals("HAUT_DROITE")) {
+            if (j.isValide(Deplace.HAUT_DROITE)) {
                 modele.actionRest();
             }
         }
-        if(cmd.equals("BAS_GAUCHE")){
-            if(j.isValide(Deplace.BAS_GAUCHE)){
+        if (cmd.equals("BAS_GAUCHE")) {
+            if (j.isValide(Deplace.BAS_GAUCHE)) {
                 modele.actionRest();
             }
         }
-        if(cmd.equals("BAS_DROITE")){
-            if(j.isValide(Deplace.BAS_DROITE)){
+        if (cmd.equals("BAS_DROITE")) {
+            if (j.isValide(Deplace.BAS_DROITE)) {
                 modele.actionRest();
             }
         }
-        if(cmd.equals("ASSECHER")) {
+        if (cmd.equals("ASSECHER")) {
             // direction d'assecher
             fenetreAS();
             modele.actionRest();
         }
-        if(cmd.equals("ASSEDBLE")) {
+        if (cmd.equals("ASSEDBLE")) {
             // direction d'assecher
+            fenetreASDB();
             fenetreASDB();
             modele.actionRest();
         }
-        if(cmd.equals("SEARCH")){
-            Cellule currentCellule = modele.getCellule(j.px+1,j.py+1);
-            if(currentCellule.getEvent() == Event.NA){
+
+        if (cmd.equals("RECUPERER")) {
+            Cellule currentCellule = modele.getCellule(j.px + 1, j.py + 1);
+            if (currentCellule.getEvent() == Event.NA) {
                 System.out.println("Pas d'artefact.");
-            }
-            else {
-                System.out.println("Artefact "+currentCellule.getEvent()+" trouve!");
-                if(modele.hasArtefact(currentCellule.getEvent())){
-                    System.out.println("Obtenir l'artefact "+currentCellule.getEvent());
-                } else{
+            } else {
+                System.out.println("Artefact " + currentCellule.getEvent() + " trouve!");
+                if (modele.hasArtefact(currentCellule.getEvent())) {
+                    System.out.println("Obtenir l'artefact " + currentCellule.getEvent());
+                } else {
                     System.out.println("Pas de Cle.");
                 }
             }
         }
 
         if (cmd.equals("C")) {
-            modele.assecher(modele.getCellule(px,py));
+            modele.assecher(modele.getCellule(px, py));
         }
 
         if (cmd.equals("G")) {
             if (j.px - 1 >= 1) {
-                modele.assecher(modele.getCellule(px-1,py));
+                modele.assecher(modele.getCellule(px - 1, py));
             }
         }
 
         if (cmd.equals("H")) {
             if (j.py - 1 >= 1) {
-                modele.assecher(modele.getCellule(px,py-1));
+                modele.assecher(modele.getCellule(px, py - 1));
             }
         }
 
         if (cmd.equals("B")) {
             if (j.py + 1 <= this.modele.HAUTEUR) {
-                modele.assecher(modele.getCellule(px,py+1));
+                modele.assecher(modele.getCellule(px, py + 1));
             }
         }
 
         if (cmd.equals("D")) {
             if (j.px + 1 <= this.modele.LARGEUR) {
-                modele.assecher(modele.getCellule(px+1,py));
+                modele.assecher(modele.getCellule(px + 1, py));
             }
         }
 
         if (cmd.equals("CDB")) {
-            modele.assecherDble(modele.getCellule(px,py));
+            modele.assecherDble(modele.getCellule(px, py));
         }
 
         if (cmd.equals("GDB")) {
             if (j.px - 1 >= 1) {
-                modele.assecherDble(modele.getCellule(px-1,py));
+                modele.assecherDble(modele.getCellule(px - 1, py));
             }
         }
 
         if (cmd.equals("HDB")) {
             if (j.py - 1 >= 1) {
-                modele.assecherDble(modele.getCellule(px,py-1));
+                modele.assecherDble(modele.getCellule(px, py - 1));
             }
         }
 
         if (cmd.equals("BDB")) {
             if (j.py + 1 <= this.modele.HAUTEUR) {
-                modele.assecherDble(modele.getCellule(px,py+1));
+                modele.assecherDble(modele.getCellule(px, py + 1));
             }
         }
 
         if (cmd.equals("DDB")) {
             if (j.px + 1 <= this.modele.LARGEUR) {
-                modele.assecherDble(modele.getCellule(px+1,py));
+                modele.assecherDble(modele.getCellule(px + 1, py));
             }
         }
     }
 
-    public void fenetreAS(){
+    public void fenetreAS() {
         JFrame frame = new JFrame("ASSECHER");
         // Position de la fenêtre
         frame.setLocation(100, 50);
@@ -227,7 +228,7 @@ public class Controleur implements ActionListener {
         C.setActionCommand("C");
     }
 
-    public void fenetreASDB(){
+    public void fenetreASDB() {
         JFrame frame = new JFrame("ASSECHER DOUBLE");
         // Position de la fenêtre
         frame.setLocation(100, 50);

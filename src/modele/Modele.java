@@ -30,6 +30,8 @@ public class Modele extends Observable {
      */
     public int tour;
     public int moveRest;
+
+    public int nbSubmergee;
     /**
      * On stocke un tableau de cellules.
      */
@@ -58,7 +60,7 @@ public class Modele extends Observable {
 
 
     /**
-     * Initialisation aléatoire des cellules, exceptées celle des bords qui ont
+     * Initialisation des cellules, exceptées celle des bords qui ont
      * été ajoutés.
      */
     public void init() {
@@ -90,11 +92,14 @@ public class Modele extends Observable {
         } else {
             this.cellules[x][y].setEtat(Etat.inondee);
         }
+        /** Quitter si toutes les case est submergee */
+        if(this.cellules[x][y].isSubmergee()){
+            nbSubmergee++;
+        }
         // System.out.println("Test Inondee: (" + x + "," + y + ")");
     }
 
-
-    public void getCle() {
+    public void rdmCle() {
         int rdCle = new Random().nextInt(5);
         if (rdCle < 4) {
             this.joueurs[tour].getCle(rdCle);
@@ -104,14 +109,17 @@ public class Modele extends Observable {
         }
     }
 
-
     public void finDeTour() {
+        /**  */
+        if(nbSubmergee==36){
+            System.exit(0);
+        }else if (nbSubmergee < LARGEUR * HAUTEUR){
         for (int i = 0; i < 3; i++) {
             rdInondee();
         }
-
+}
         /** A la fin de tour, joueurs peuvent obtenir une cle */
-        getCle();
+        rdmCle();
 
         moveRest = 3;
         if (this.tour + 1 == this.idJoueur) {
